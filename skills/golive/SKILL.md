@@ -10,6 +10,12 @@ provider operations after approval and records what its checks establish. The hu
 accounts and handles purchases; app migrations, business flows and guided steps need their own
 review. Never turn an infrastructure check into a claim that the entire app works.
 
+## System Gap Intelligence — mandatory on every build
+
+Before implementation and again before release, run the system-gap sweep in `docs/SYSTEM-GAP-INTELLIGENCE.md`. Treat it as part of the build loop, not a final audit. Map every material claim to its capability, authority, dependencies, execution path, evidence, failure/recovery path, security boundary and operational owner. Explicitly search for hidden assumptions, legacy paths, disconnected runtime integrations, untested failure modes, duplicate payment/data paths, customer journeys that stop at a button, and claims that exceed evidence.
+
+A passing unit/integration test does not close a production claim by itself. Record **BUILT / PROVEN / MISSING / OVERLOOKED / BLOCKED / NEXT WIN** at each major checkpoint. `UNKNOWN`, `SKIPPED` and `HUMAN` remain open until their evidence or owner action is recorded. When a new build contradicts an approved architecture or reintroduces a retired dependency, stop and surface the contradiction before continuing.
+
 ```bash
 node <this-skill-dir>/scripts/golive.mjs <command> --json
 ```
